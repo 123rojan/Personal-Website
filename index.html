@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rojan Tamang — Electrical Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --white:#fafaf8;
+  --black:#111110;
+  --gray-1:#f4f4f1;
+  --gray-2:#e8e8e3;
+  --gray-3:#c0c0b8;
+  --gray-4:#888880;
+  --accent:#0d6b5e;
+  --accent-light:#e8f4f2;
+  --accent-mid:#1a9b88;
+  --serif:'DM Serif Display',serif;
+  --sans:'DM Sans',sans-serif;
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+
+body{
+  font-family:var(--sans);
+  background:var(--white);
+  color:var(--black);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--gray-1)}
+::-webkit-scrollbar-thumb{background:var(--gray-3);border-radius:2px}
+
+/* ── NAV ── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(250,250,248,0.92);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--gray-2);
+}
+
+nav{
+  max-width:1080px;margin:0 auto;
+  padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;
+}
+
+.logo{
+  font-family:var(--serif);
+  font-size:1.15rem;
+  color:var(--black);
+  text-decoration:none;
+  letter-spacing:0.01em;
+}
+
+.logo span{color:var(--accent)}
+
+.nav-links{
+  display:flex;gap:2.5rem;list-style:none;
+}
+
+.nav-links a{
+  font-size:0.8rem;
+  font-weight:500;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--gray-4);
+  text-decoration:none;
+  transition:color 0.2s;
+  position:relative;
+}
+
+.nav-links a::after{
+  content:'';
+  position:absolute;bottom:-2px;left:0;right:0;
+  height:1px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.25s ease;
+}
+
+.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+/* ── LAYOUT ── */
+.container{max-width:1080px;margin:0 auto;padding:0 2rem}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:120px 2rem 80px;
+  max-width:1080px;margin:0 auto;
+}
+
+.hero-inner{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:5rem;
+  align-items:center;
+  width:100%;
+}
+
+.hero-eyebrow{
+  font-size:0.75rem;
+  font-weight:500;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:10px;
+  opacity:0;animation:rise 0.6s ease 0.1s forwards;
+}
+
+.hero-eyebrow::before{
+  content:'';display:block;
+  width:28px;height:1.5px;background:var(--accent);
+}
+
+.hero-name{
+  font-family:var(--serif);
+  font-size:clamp(3rem,6vw,5.2rem);
+  line-height:1.02;
+  letter-spacing:-0.02em;
+  color:var(--black);
+  margin-bottom:1.5rem;
+  opacity:0;animation:rise 0.6s ease 0.2s forwards;
+}
+
+.hero-name em{
+  font-style:italic;color:var(--accent);
+}
+
+.hero-bio{
+  font-size:1rem;
+  font-weight:300;
+  color:var(--gray-4);
+  line-height:1.8;
+  max-width:520px;
+  margin-bottom:2.5rem;
+  opacity:0;animation:rise 0.6s ease 0.3s forwards;
+}
+
+.hero-cta{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:rise 0.6s ease 0.4s forwards;
+}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:0.8rem;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:0.8rem 1.6rem;border-radius:3px;
+  text-decoration:none;cursor:pointer;
+  transition:all 0.22s ease;
+}
+
+.btn-solid{
+  background:var(--accent);color:#fff;
+  border:1.5px solid var(--accent);
+}
+.btn-solid:hover{background:transparent;color:var(--accent)}
+
+.btn-outline{
+  background:transparent;color:var(--black);
+  border:1.5px solid var(--gray-2);
+}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero card */
+.hero-card{
+  background:var(--gray-1);
+  border:1px solid var(--gray-2);
+  border-radius:6px;
+  overflow:hidden;
+  opacity:0;animation:rise 0.6s ease 0.5s forwards;
+}
+
+.hero-card-header{
+  background:var(--accent);
+  padding:1.25rem 1.5rem;
+  display:flex;align-items:center;gap:10px;
+}
+
+.avatar-ring{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:1.1rem;
+  color:#fff;font-style:italic;flex-shrink:0;
+}
+
+.hero-card-name{
+  font-size:0.95rem;font-weight:500;color:#fff;
+  margin-bottom:1px;
+}
+.hero-card-role{
+  font-size:0.75rem;color:rgba(255,255,255,0.7);
+  letter-spacing:0.03em;
+}
+
+.hero-card-body{padding:1.25rem 1.5rem}
+
+.stat{
+  display:flex;justify-content:space-between;
+  padding:0.55rem 0;
+  border-bottom:1px solid var(--gray-2);
+  align-items:center;
+}
+.stat:last-child{border-bottom:none}
+
+.stat-label{
+  font-size:0.75rem;color:var(--gray-4);
+  letter-spacing:0.03em;
+}
+.stat-value{
+  font-size:0.85rem;font-weight:500;color:var(--black);
+}
+.stat-value.accent{color:var(--accent)}
+
+/* ── SECTION BASE ── */
+section{padding:6rem 0}
+
+.section-label{
+  font-size:0.7rem;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:0.6rem;
+}
+
+h2{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem,3vw,2.4rem);
+  line-height:1.15;letter-spacing:-0.01em;
+  color:var(--black);margin-bottom:3rem;
+}
+
+.divider{
+  width:100%;height:1px;
+  background:var(--gray-2);
+  margin-bottom:4rem;
+}
+
+/* ── ABOUT ── */
+.about-grid{
+  display:grid;grid-template-columns:1.2fr 1fr;
+  gap:5rem;align-items:start;
+}
+
+.about-text p{
+  font-size:0.97rem;font-weight:300;
+  color:#444440;line-height:1.85;
+  margin-bottom:1.1rem;
+}
+
+.about-text p strong{font-weight:500;color:var(--black)}
+
+.about-aside{}
+
+.aside-block{
+  background:var(--gray-1);
+  border:1px solid var(--gray-2);
+  border-radius:5px;
+  padding:1.5rem;
+  margin-bottom:1rem;
+}
+
+.aside-block h3{
+  font-size:0.7rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gray-4);margin-bottom:1rem;
+}
+
+.tag-grid{display:flex;flex-wrap:wrap;gap:6px}
+
+.tag{
+  font-size:0.75rem;
+  padding:4px 12px;
+  border-radius:100px;
+  background:var(--white);
+  border:1px solid var(--gray-2);
+  color:#555550;
+  transition:all 0.2s;
+}
+
+.tag:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+
+.tag.accent-tag{
+  background:var(--accent-light);
+  border-color:transparent;
+  color:var(--accent);
+  font-weight:500;
+}
+
+/* ── PUBLICATIONS ── */
+.pub-item{
+  display:grid;
+  grid-template-columns:80px 1fr;
+  gap:1.5rem;
+  padding:1.75rem 0;
+  border-bottom:1px solid var(--gray-2);
+  align-items:start;
+  transition:background 0.2s;
+}
+
+.pub-item:first-child{border-top:1px solid var(--gray-2)}
+
+.pub-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:60px;padding:4px 0;
+  font-size:0.65rem;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;
+  border-radius:3px;
+  margin-top:3px;
+}
+
+.pub-badge.journal{background:var(--accent-light);color:var(--accent)}
+.pub-badge.conf{background:#f0ede6;color:#8b6914}
+
+.pub-content{}
+
+.pub-title{
+  font-family:var(--serif);
+  font-size:1rem;
+  font-style:italic;
+  color:var(--black);
+  line-height:1.45;
+  margin-bottom:0.4rem;
+}
+
+.pub-authors{
+  font-size:0.8rem;color:var(--gray-4);
+  margin-bottom:0.25rem;
+  font-weight:300;
+}
+
+.pub-venue{
+  font-size:0.8rem;color:var(--gray-4);
+  font-weight:300;
+}
+
+.pub-venue a{
+  color:var(--accent);text-decoration:none;
+  transition:opacity 0.2s;
+}
+.pub-venue a:hover{opacity:0.7}
+
+.award-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:0.7rem;font-weight:500;
+  color:#92400e;
+  background:#fef3c7;
+  border:1px solid #fde68a;
+  border-radius:100px;
+  padding:3px 10px;
+  margin-top:8px;
+}
+
+/* ── PROJECTS ── */
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+  gap:1.5px;
+  background:var(--gray-2);
+  border:1px solid var(--gray-2);
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.project-card{
+  background:var(--white);
+  padding:2rem;
+  transition:background 0.2s;
+  cursor:default;
+}
+
+.project-card:hover{background:var(--gray-1)}
+
+.project-period{
+  font-size:0.7rem;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--gray-3);margin-bottom:0.75rem;
+}
+
+.project-name{
+  font-size:1rem;font-weight:500;
+  color:var(--black);
+  line-height:1.35;margin-bottom:0.6rem;
+}
+
+.project-desc{
+  font-size:0.85rem;font-weight:300;
+  color:var(--gray-4);line-height:1.65;
+  margin-bottom:1rem;
+}
+
+.project-tools{display:flex;flex-wrap:wrap;gap:5px}
+
+/* ── EXPERIENCE ── */
+.timeline{
+  display:flex;flex-direction:column;
+  border-left:1.5px solid var(--gray-2);
+  margin-left:6px;padding-left:2.5rem;
+  gap:0;
+}
+
+.tl-item{
+  position:relative;
+  padding-bottom:2.75rem;
+}
+
+.tl-item:last-child{padding-bottom:0}
+
+.tl-dot{
+  position:absolute;left:-2.85rem;top:6px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--white);
+  border:2px solid var(--accent);
+  transition:background 0.2s;
+}
+
+.tl-item:hover .tl-dot{background:var(--accent)}
+
+.tl-period{
+  font-size:0.72rem;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--gray-3);margin-bottom:0.35rem;
+}
+
+.tl-role{
+  font-size:1.05rem;font-weight:500;
+  color:var(--black);margin-bottom:0.15rem;
+}
+
+.tl-org{
+  font-size:0.85rem;color:var(--accent);
+  margin-bottom:0.75rem;font-weight:400;
+}
+
+.tl-bullets{
+  list-style:none;
+  display:flex;flex-direction:column;gap:0.3rem;
+}
+
+.tl-bullets li{
+  font-size:0.87rem;font-weight:300;
+  color:#666660;line-height:1.6;
+  padding-left:1.1rem;position:relative;
+}
+
+.tl-bullets li::before{
+  content:'·';
+  position:absolute;left:0;
+  color:var(--gray-3);font-size:1rem;
+}
+
+/* ── CONTACT ── */
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:start;
+}
+
+.contact-intro{
+  font-size:1rem;font-weight:300;
+  color:var(--gray-4);line-height:1.8;
+  margin-bottom:2rem;
+}
+
+.contact-links{
+  display:flex;flex-direction:column;gap:0.75rem;
+}
+
+.contact-link{
+  display:flex;align-items:center;gap:1rem;
+  text-decoration:none;
+  padding:0.9rem 1.1rem;
+  border:1px solid var(--gray-2);
+  border-radius:5px;
+  background:var(--white);
+  color:var(--black);
+  transition:all 0.22s;
+}
+
+.contact-link:hover{
+  border-color:var(--accent);
+  background:var(--accent-light);
+  color:var(--accent);
+  transform:translateX(4px);
+}
+
+.cl-icon{
+  width:36px;height:36px;
+  border-radius:4px;
+  background:var(--gray-1);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background 0.22s;
+}
+
+.contact-link:hover .cl-icon{background:rgba(13,107,94,0.12)}
+
+.cl-icon svg{
+  width:16px;height:16px;
+  stroke:currentColor;fill:none;
+  stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;
+}
+
+.cl-text{}
+.cl-label{font-size:0.7rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray-4);margin-bottom:1px}
+.cl-value{font-size:0.9rem;font-weight:400}
+
+/* info panel */
+.info-panel{
+  border:1px solid var(--gray-2);
+  border-radius:5px;overflow:hidden;
+}
+
+.info-panel-head{
+  background:var(--gray-1);
+  padding:1rem 1.25rem;
+  border-bottom:1px solid var(--gray-2);
+  font-size:0.72rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gray-4);
+}
+
+.info-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0.65rem 1.25rem;
+  border-bottom:1px solid var(--gray-2);
+  font-size:0.82rem;
+}
+
+.info-row:last-child{border-bottom:none}
+.info-row .k{color:var(--gray-4);font-weight:400}
+.info-row .v{font-weight:500;color:var(--black)}
+.info-row .v.open{color:var(--accent)}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--gray-2);
+  padding:2rem;text-align:center;
+}
+
+footer p{
+  font-size:0.78rem;color:var(--gray-3);
+  letter-spacing:0.04em;
+}
+
+footer span{color:var(--accent)}
+
+/* ── ANIMATIONS ── */
+@keyframes rise{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:800px){
+  .hero-inner,.about-grid,.contact-grid{
+    grid-template-columns:1fr;gap:2.5rem;
+  }
+  .hero-card{display:none}
+  .pub-item{grid-template-columns:1fr}
+  .pub-badge{margin-bottom:0.5rem}
+  .nav-links{gap:1.25rem}
+  h2{margin-bottom:2rem}
+}
+
+@media(max-width:480px){
+  .nav-links{display:none}
+  .hero-name{font-size:2.6rem}
+  section{padding:4rem 0}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <nav>
+    <a href="#" class="logo">Rojan <span>Tamang</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Electrical Engineer &amp; Researcher</p>
+      <h1 class="hero-name">Rojan<br><em>Tamang</em></h1>
+      <p class="hero-bio">Early-career researcher focused on power electronics, advanced control systems, and sustainable energy. Currently a Teaching Assistant and Co-PI at Khwopa College of Engineering, Tribhuvan University, Nepal.</p>
+      <div class="hero-cta">
+        <a href="#publications" class="btn btn-solid">View Publications</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-header">
+        <div class="avatar-ring">RT</div>
+        <div>
+          <div class="hero-card-name">Rojan Tamang</div>
+          <div class="hero-card-role">B.E. Electrical Engineering</div>
+        </div>
+      </div>
+      <div class="hero-card-body">
+        <div class="stat">
+          <span class="stat-label">Publications</span>
+          <span class="stat-value accent">5 Papers</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Degree Score</span>
+          <span class="stat-value">77.51%</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Current Role</span>
+          <span class="stat-value">Teaching Assistant</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Grant Status</span>
+          <span class="stat-value accent">Co-PI · Active</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Award</span>
+          <span class="stat-value">RESSD-2025 🏆</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">ORCID</span>
+          <span class="stat-value" style="font-size:0.78rem">0009-0005-0912-4880</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="divider"></div>
+    <p class="section-label">About Me</p>
+    <h2>Engineer. Researcher.<br>Educator.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I hold a <strong>Bachelor's degree in Electrical Engineering</strong> from Khwopa College of Engineering, Tribhuvan University, where my thesis examined the effect of current harmonic-induced heating on transformer ageing — work that earned an Outstanding Paper Award at RESSD-2025.</p>
+        <p>My research interests sit at the intersection of <strong>power electronics and advanced control</strong>: solid-state transformers, Model Predictive Control (MPC), Virtual Synchronous Generator (VSG) modelling, Modular Multilevel Converters (MMC), and grid-forming inverter strategies for sustainable energy systems.</p>
+        <p>Beyond research, I actively contribute to engineering education — having delivered training programmes in <strong>MATLAB, LaTeX, and AutoCAD</strong> to junior students, and currently serving as Teaching Assistant in the Department of Electrical Engineering.</p>
+        <p>I am actively seeking <strong>graduate-level research opportunities</strong> in power electronics, control systems, and energy infrastructure.</p>
+      </div>
+      <div class="about-aside">
+        <div class="aside-block">
+          <h3>Technical Tools</h3>
+          <div class="tag-grid">
+            <span class="tag accent-tag">MATLAB / Simulink</span>
+            <span class="tag accent-tag">DIgSILENT</span>
+            <span class="tag">PLECS</span>
+            <span class="tag">ArcGIS</span>
+            <span class="tag">AutoCAD</span>
+            <span class="tag">C / C++</span>
+            <span class="tag">Arduino</span>
+            <span class="tag">ESP32</span>
+            <span class="tag">LaTeX</span>
+          </div>
+        </div>
+        <div class="aside-block">
+          <h3>Research Focus</h3>
+          <div class="tag-grid">
+            <span class="tag">Power Electronics</span>
+            <span class="tag">MPC</span>
+            <span class="tag">Solid-State Transformers</span>
+            <span class="tag">VSG Modelling</span>
+            <span class="tag">Grid-Forming Inverters</span>
+            <span class="tag">Distribution Systems</span>
+            <span class="tag">Renewable Integration</span>
+          </div>
+        </div>
+        <div class="aside-block">
+          <h3>Languages</h3>
+          <div class="tag-grid">
+            <span class="tag accent-tag">Nepali — Native</span>
+            <span class="tag">English — Fluent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="container">
+    <div class="divider"></div>
+    <p class="section-label">Publications</p>
+    <h2>Research Output</h2>
+
+    <div class="pub-item">
+      <span class="pub-badge journal">Journal</span>
+      <div class="pub-content">
+        <div class="pub-title">Reliability enhancement and community sustainability through optimal rooftop PV penetration in urban feeders</div>
+        <div class="pub-authors">R. Tamang*, A. Bhatt, R. Gwachha, G. Tamrakar, A. Shrestha, R. Gautam</div>
+        <div class="pub-venue"><em>Electric Power Systems Research</em>, vol. 258, p. 113169, 2026 · <a href="https://doi.org/10.1016/j.epsr.2026.113169" target="_blank" rel="noopener">DOI ↗</a></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge journal">Journal</span>
+      <div class="pub-content">
+        <div class="pub-title">Analysis of the effect of current harmonic induced heating on transformer ageing</div>
+        <div class="pub-authors">R. Tamang*, B. Shrestha, A. Kashichhwa, S. Gautam, U. Bhattarai, R. Gautam</div>
+        <div class="pub-venue"><em>Journal of Science and Engineering</em>, vol. 12, no. 2, 2025 · <a href="https://doi.org/10.3126/jsce.v12i2.91406" target="_blank" rel="noopener">DOI ↗</a></div>
+        <div class="award-pill">🏆 Outstanding Paper Award · RESSD-2025</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge journal">Journal</span>
+      <div class="pub-content">
+        <div class="pub-title">Design and fabrication of cost-effective high voltage power source for the generation of non-thermal plasma</div>
+        <div class="pub-authors">K. R. Chhusyaki, R. Barnwal, R. Tamang*, et al.</div>
+        <div class="pub-venue"><em>European Journal of Electrical Engineering and Computer Science (EJECE)</em>, vol. 9(5), 2025</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge conf">Conf.</span>
+      <div class="pub-content">
+        <div class="pub-title">Comparative analysis of distributed and centralized PV integration in a distribution feeder using DIgSILENT PowerFactory</div>
+        <div class="pub-authors">R. Tamang*, A. Bhatt, R. Gautam, R. Gwachha</div>
+        <div class="pub-venue"><em>OKRP Conference 2025</em></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge conf">Conf.</span>
+      <div class="pub-content">
+        <div class="pub-title">Space vector pulse width modulation inverter based indirect field oriented control for induction motor</div>
+        <div class="pub-authors">A. Bhatta, S. Timsina, R. Basnet, et al.</div>
+        <div class="pub-venue"><em>2025 11th International Conference on Power Systems (ICPS)</em> · <a href="https://doi.org/10.1109/ICPS67276" target="_blank" rel="noopener">DOI ↗</a></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="divider"></div>
+    <p class="section-label">Projects</p>
+    <h2>Selected Work</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-period">Dec 2025 — Ongoing · Small Grant · Co-PI</div>
+        <div class="project-name">MPC for Solid-State Transformers</div>
+        <div class="project-desc">Mathematical modelling of high-frequency power converters in solid-state transformers and active/reactive power control via Model Predictive Control.</div>
+        <div class="project-tools">
+          <span class="tag">MATLAB</span><span class="tag">PLECS</span><span class="tag">MPC</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-period">May – Nov 2024 · Research Internship</div>
+        <div class="project-name">Solar Rooftop Potential — Bhaktapur Ward-08</div>
+        <div class="project-desc">Digitised rooftops in ArcGIS, estimated and validated rooftop areas, and modelled the Nalinchowk distribution feeder in DIgSILENT for simulation-based analysis.</div>
+        <div class="project-tools">
+          <span class="tag">ArcGIS</span><span class="tag">DIgSILENT</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-period">Nov 2023 – Feb 2024</div>
+        <div class="project-name">AVR of Synchronous Generator using PID</div>
+        <div class="project-desc">Comprehensive study and MATLAB Simulink implementation of an Automatic Voltage Regulation system using a PID controller for synchronous generators.</div>
+        <div class="project-tools">
+          <span class="tag">MATLAB</span><span class="tag">Simulink</span><span class="tag">PID</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-period">June 2024</div>
+        <div class="project-name">Reliability Evaluation — Balaju Substation</div>
+        <div class="project-desc">Assessed distribution transformer reliability using Loss of Load Probability (LOLP) analysis at Balaju substation.</div>
+        <div class="project-tools">
+          <span class="tag">LOLP</span><span class="tag">Reliability</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-period">Feb 2025</div>
+        <div class="project-name">Auto Water Irrigation System</div>
+        <div class="project-desc">Prototype automated irrigation system using ESP32 and a resistive moisture sensor to control water pump operation based on real-time soil conditions.</div>
+        <div class="project-tools">
+          <span class="tag">ESP32</span><span class="tag">C++</span><span class="tag">Embedded</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-period">Apr – Jul 2022</div>
+        <div class="project-name">Flame Detector &amp; Alarm System</div>
+        <div class="project-desc">Arduino-based flame detection and real-time alarm prototype integrating sensor interfacing and alert logic, developed as a third-semester minor project.</div>
+        <div class="project-tools">
+          <span class="tag">Arduino</span><span class="tag">C</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="divider"></div>
+    <p class="section-label">Experience</p>
+    <h2>Background</h2>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">April 2025 — Present</div>
+        <div class="tl-role">Teaching Assistant</div>
+        <div class="tl-org">Khwopa College of Engineering, Tribhuvan University</div>
+        <ul class="tl-bullets">
+          <li>Supporting undergraduate instruction in the Department of Electrical Engineering</li>
+          <li>Initiated and co-leading research grant on MPC for solid-state transformers</li>
+          <li>Delivered 30-hour combined MATLAB and LaTeX training to junior students (Jan 2025)</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">May – Nov 2024 · 6 Months</div>
+        <div class="tl-role">Research Intern</div>
+        <div class="tl-org">Khwopa College of Engineering, Tribhuvan University</div>
+        <ul class="tl-bullets">
+          <li>Led identification of solar rooftop potential for Bhaktapur municipality Ward-08</li>
+          <li>Digitised and validated rooftop areas using ArcGIS</li>
+          <li>Modelled and analysed Nalinchowk feeder in DIgSILENT PowerFactory</li>
+          <li>Authored technical research report on findings</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Oct 2024 · 15 Days</div>
+        <div class="tl-role">Internship</div>
+        <div class="tl-org">Bhaktapur Sub-Station, 132/66/11 kV</div>
+        <ul class="tl-bullets">
+          <li>Observed and assisted in substation operation and maintenance</li>
+          <li>Volunteered in erection of a 132 kV hybrid GIS substation</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="divider"></div>
+    <p class="section-label">Contact</p>
+    <h2>Let's Connect</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">I'm open to graduate research opportunities, collaborations, and conversations about power electronics and sustainable energy. Whether you're a potential supervisor, industry partner, or fellow researcher — I'd love to hear from you.</p>
+        <div class="contact-links">
+          <a href="mailto:123tamangrojan@gmail.com" class="contact-link">
+            <div class="cl-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            </div>
+            <div class="cl-text">
+              <div class="cl-label">Email</div>
+              <div class="cl-value">123tamangrojan@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/rojan-tamang-214962284/" target="_blank" rel="noopener" class="contact-link">
+            <div class="cl-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="11" x2="8" y2="17"/><line x1="8" y1="8" x2="8" y2="8.5" stroke-width="2.5"/><path d="M12 11v6"/><path d="M12 13c0-1.1.9-2 2-2s2 .9 2 2v4"/></svg>
+            </div>
+            <div class="cl-text">
+              <div class="cl-label">LinkedIn</div>
+              <div class="cl-value">rojan-tamang-214962284</div>
+            </div>
+          </a>
+          <a href="tel:+9779865477326" class="contact-link">
+            <div class="cl-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="cl-text">
+              <div class="cl-label">Phone</div>
+              <div class="cl-value">+977 9865477326</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <div class="info-panel-head">Research Profile</div>
+        <div class="info-row"><span class="k">ORCID</span><span class="v" style="font-size:0.78rem">0009-0005-0912-4880</span></div>
+        <div class="info-row"><span class="k">Institution</span><span class="v">KhCE, Tribhuvan University</span></div>
+        <div class="info-row"><span class="k">Location</span><span class="v">Bhaktapur, Nepal</span></div>
+        <div class="info-row"><span class="k">Availability</span><span class="v open">Open to opportunities</span></div>
+        <div class="info-row"><span class="k">Focus Areas</span><span class="v">Power Electronics, MPC</span></div>
+        <div class="info-row"><span class="k">Degree</span><span class="v">B.E. Electrical Engineering</span></div>
+        <div class="info-row"><span class="k">Referees</span><span class="v">Available on request</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>Rojan Tamang</span> · Bhaktapur, Nepal · Electrical Engineer &amp; Researcher</p>
+</footer>
+
+</body>
+</html>
